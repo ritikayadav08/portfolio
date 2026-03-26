@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ritika Yadav · Full Stack Portfolio</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome 6 (free) for extra icons & advanced styling -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+/* ===== advanced CSS with modern effects ===== */
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; }
+
+/* smooth theme transitions */
+* { transition: background-color 0.2s ease, border-color 0.2s, color 0.2s, transform 0.2s; }
+
+/* hero box with glassmorphism */
+.hero-box {
+    background: rgba(5, 15, 30, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 3rem 2.5rem;
+    border-radius: 2.5rem;
+    box-shadow: 0 30px 50px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+.dark .hero-box {
+    background: rgba(10, 10, 20, 0.75);
+    border-color: #334155;
+}
+
+/* section title with gradient and animated underline */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, #3b82f6, #a855f7);
+    border-radius: 8px;
+    transition: width 0.3s;
+}
+.section-title:hover::after {
+    width: 120px;
+}
+.dark .section-title::after {
+    background: linear-gradient(90deg, #60a5fa, #c084fc);
+}
+
+/* card with glass effect & advanced hover */
+.card {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 1.5rem;
+    border-radius: 1.8rem;
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+.card:hover::before {
+    left: 100%;
+}
+.card:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 0 30px 45px -12px #2563eb80;
+    border-color: #3b82f6;
+}
+.dark .card {
+    background: rgba(31,41,55,0.8);
+    border-color: rgba(75,85,99,0.4);
+    box-shadow: 0 20px 30px -12px #00000055;
+}
+.dark .card:hover {
+    box-shadow: 0 30px 45px -12px #3b82f6aa;
+    border-color: #60a5fa;
+}
+
+/* training & project cards additional style */
+.training-card, .project-card {
+    border-left: 6px solid #2563eb;
+    border-radius: 1.8rem 1rem 1rem 1.8rem;
+}
+.dark .training-card, .dark .project-card {
+    border-left-color: #60a5fa;
+}
+.training-card:hover, .project-card:hover {
+    border-left-width: 10px;
+    padding-left: 2rem;
+}
+
+/* year frame (uniform for education) */
+.year-frame {
+    background: linear-gradient(145deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 8px 16px -6px #1e3a8a;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.dark .year-frame {
+    background: linear-gradient(145deg, #3b82f6, #2563eb);
+    box-shadow: 0 8px 16px -6px #0f172a;
+}
+
+/* buttons with gradient & shine */
+.btn {
+    padding: 0.8rem 2.2rem;
+    border-radius: 40px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+    background-size: 200% auto;
+    box-shadow: 0 8px 18px -8px rgba(0,90,255,0.4);
+    position: relative;
+    overflow: hidden;
+}
+.btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(30deg);
+    transition: left 0.4s;
+}
+.btn:hover::after {
+    left: 100%;
+}
+.btn-blue {
+    background-image: linear-gradient(145deg, #2563eb, #1d4ed8, #1e3a8a);
+}
+.btn-green {
+    background-image: linear-gradient(145deg, #10b981, #059669, #047857);
+}
+.btn-blue:hover, .btn-green:hover {
+    background-position: right center;
+    transform: scale(1.02);
+}
+
+/* tech stack badges */
+.tech-badge {
+    background: rgba(37, 99, 235, 0.1);
+    color: #1e40af;
+    padding: 0.3rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(37,99,235,0.3);
+}
+.dark .tech-badge {
+    background: rgba(96, 165, 250, 0.2);
+    color: #bfdbfe;
+    border-color: #3b82f6;
+}
+
+/* progress bar style for skills */
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+.progress-bg {
+    width: 100%;
+    height: 10px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.dark .progress-bg {
+    background: rgba(255,255,255,0.1);
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 20px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* certificates cards (preserve original look but enhanced) */
+.cert-card {
+    background: white;
+    transition: all 0.3s;
+}
+.dark .cert-card {
+    background: #1f2937;
+}
+.cert-card:hover {
+    transform: translateY(-8px) rotate(0.5deg);
+}
+
+/* contact title centered */
+.contact-title {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contact-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* animated background for home */
+@keyframes softFloat {
+    0% { transform: scale(1) translate(0,0); }
+    50% { transform: scale(1.02) translate(-1%, 1%); }
+    100% { transform: scale(1) translate(0,0); }
+}
+.animated-bg img {
+    animation: softFloat 24s infinite alternate ease-in-out;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3b82f6, #8b5cf6); border-radius: 10px; }
+.dark ::-webkit-scrollbar-track { background: #1e293b; }
+</style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white selection:bg-blue-300/30">
+
+<!-- ========== HEADER (glassmorphism) ========== -->
+<header class="bg-gray-900/90 dark:bg-slate-950/95 text-white sticky top-0 z-50 backdrop-blur-lg border-b border-white/10 shadow-xl">
+<div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+<h1 class="text-3xl font-black tracking-tighter bg-gradient-to-r from-blue-300 to-indigo-200 bg-clip-text text-transparent">✨ RITIKA</h1>
+<nav class="flex items-center gap-6">
+<ul class="flex gap-6 font-semibold">
+<li><a href="#home" class="hover:text-blue-300 transition px-2 py-1 rounded-full hover:bg-white/10">Home</a></li>
+<li><a href="#about" class="hover:text-blue-300 transition px-2 py-1">About</a></li>
+<li><a href="#skills" class="hover:text-blue-300 transition px-2 py-1">Skills</a></li>
+<li><a href="#training" class="hover:text-blue-300 border-b-2 border-blue-400 px-2 py-1">Training</a></li>
+<li><a href="#projects" class="hover:text-blue-300 transition px-2 py-1">Projects</a></li>
+<li><a href="#certificates" class="hover:text-blue-300 transition px-2 py-1">Certificates</a></li>
+<li><a href="#education-page" class="hover:text-blue-300 transition px-2 py-1">Education</a></li>
+<li><a href="#contact" class="hover:text-blue-300 transition px-2 py-1">Contact</a></li>
+</ul>
+<button onclick="toggleTheme()" class="ml-2 p-2 bg-white/10 rounded-2xl w-10 h-10 flex items-center justify-center text-xl hover:bg-white/20 transition" title="toggle theme">🌙</button>
+</nav>
+</div>
+</header>
+
+<!-- ========== HOME ========== -->
+<section id="home" class="min-h-screen flex items-center justify-center text-white px-6 relative overflow-hidden">
+<div class="absolute inset-0 animated-bg">
+    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400" alt="bg" class="w-full h-full object-cover blur-[2px] scale-110 brightness-[0.4]">
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900/80"></div>
+
+<div class="hero-box text-center max-w-2xl relative z-10">
+<h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">I'm Ritika yadav</h2>
+<p class="text-lg leading-relaxed text-white/90">
+I am a passionate and dedicated Full Stack Developer who loves creating modern, responsive, and dynamic web applications.
+I enjoy working with both frontend and backend technologies to build complete solutions.
+I continuously explore new tools and frameworks to enhance my development skills.
+My focus is on writing clean, efficient, and scalable code.
+I aim to create user-friendly digital experiences that solve real-world problems.
+</p>
+<br>
+<a href="#projects" class="btn btn-blue shadow-2xl"><i class="fas fa-code"></i> View My Work</a>
+</div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about" class="py-20 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 px-6">
+
+    <!-- Image Container -->
+    <<div class="flex justify-center relative group shrink-0">
+        <!-- Circular glow effect -->
+        <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition"></div>
+        <!-- Circular image with border -->
+        <img src="images/my pic.jpeg" alt="ritikayadav" class="w-60 h-60 object-cover rounded-full shadow-2xl border-4 border-white dark:border-gray-700">
+    </div>
+
+    <!-- Text Section -->
+    <div class="text-center md:text-left">
+        <h2 class="section-title mb-4">About Me</h2>
+        
+
+
+<p class="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+I am Ritika Yadav, a highly motivated and enthusiastic B.Tech student with a deep interest in Full Stack Development and Problem Solving.
+I enjoy learning new technologies and applying them in real-world projects.
+I have solved over 150+ problems on LeetCode, which has strengthened my logical thinking and DSA skills.
+I believe in continuous improvement and always try to enhance my technical abilities.
+I have a strong foundation in programming and web development.
+I love solving real-world problems through code.
+I am passionate about creating responsive and user-friendly websites.
+I enjoy working on both frontend and backend development using technologies like HTML, CSS, Tailwind CSS, JavaScript, PHP, and Laravel.
+I am always curious to explore new tools and frameworks.
+I believe teamwork and collaboration are key to success.
+I am dedicated to achieving my career goals in the IT industry.
+I focus on writing clean, efficient, and maintainable code.
+I am eager to learn from experienced developers and improve continuously.
+I actively participate in learning and building practical projects.
+I am confident in my ability to adapt to new challenges.
+I aim to become a successful Full Stack Developer.
+I enjoy designing creative and interactive user interfaces.
+I am committed to continuous learning and growth.
+I strive to deliver high-quality work in every project.
+I believe in hard work and consistency.
+I am excited about my journey in the tech field.
+</p>
+<div class="flex gap-4 mt-6">
+    <a href="#contact" class="btn btn-green">
+        <i class="fas fa-paper-plane"></i> Get In Touch
+    </a>
+
+    <a href="./images/updated_cv.pdf" target="_blank" class="btn btn-blue">
+        <i class="fas fa-file-pdf"></i> View CV
+    </a>
+</div>
+</section>
+
+<!-- ========== SKILLS (updated with progress bars and new categories) ========== -->
+<section id="skills" class="py-20 bg-gray-200 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="section-title text-blue-700 dark:text-blue-400 text-center">Skills & Technologies</h2>
+        <p class="text-center text-lg text-slate-600 dark:text-slate-400 mb-10">My technical expertise and currently learning technologies</p>
+
+        <!-- three column grid for skill categories -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Programming Languages -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-bold mb-6 text-indigo-700 dark:text-indigo-300 flex items-center gap-2"><i class="fas fa-code"></i> Programming Languages</h3>
+                <div class="skill-item">
+                    <div class="skill-header"><span>C</span> <span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>C++</span> <span>85%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:85%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>JavaScript</span> <span>85%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:85%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>PHP</span> <span>70%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:70%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Java</span> <span>60%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:60%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Python</span> <span>70%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:70%"></div></div>
+                </div>
+            </div>
+
+            <!-- Frameworks & Libraries -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-bold mb-6 text-indigo-700 dark:text-indigo-300 flex items-center gap-2"><i class="fas fa-cubes"></i> Frameworks & Libraries</h3>
+                <div class="skill-item">
+                    <div class="skill-header"><span>HTML</span> <span>95%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:95%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>CSS</span> <span>95%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:95%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Node.js</span> <span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>React</span> <span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Tailwind CSS</span> <span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Express.js</span> <span>75%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:75%"></div></div>
+                </div>
+            </div>
+
+            <!-- Tools & Platforms -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-bold mb-6 text-indigo-700 dark:text-indigo-300 flex items-center gap-2"><i class="fas fa-tools"></i> Tools & Platforms</h3>
+                <div class="skill-item">
+                    <div class="skill-header"><span>MySQL</span> <span>75%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:75%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>MongoDB</span> <span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>VS Code</span> <span>60%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:60%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Git</span> <span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>GitHub</span> <span>85%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width:85%"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soft Skills (including Good Listener) -->
+        <div class="mt-12">
+            <h3 class="text-2xl font-bold text-center text-purple-700 dark:text-purple-300 mb-6"><i class="fas fa-heart mr-2"></i>Soft Skills</h3>
+            <div class="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-comments mr-2"></i>Communication</div>
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-users mr-2"></i>Teamwork</div>
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-puzzle-piece mr-2"></i>Problem Solving</div>
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-clock mr-2"></i>Time Management</div>
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-sync-alt mr-2"></i>Adaptability</div>
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-crown mr-2"></i>Leadership</div>
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-lightbulb mr-2"></i>Creativity</div>
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-brain mr-2"></i>Critical Thinking</div>
+                <!-- NEW: Good Listener -->
+                <div class="card text-purple-700 dark:text-purple-300 px-6 py-3 text-lg"><i class="fas fa-ear-listen"></i> Good Listener</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TRAINING ========== -->
+<section id="training" class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-4 mb-4">
+            <h2 class="section-title">📚 Training</h2>
+            <span class="bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-200 px-5 py-2 rounded-full text-sm font-bold">certified programs</span>
+        </div>
+        <p class="text-lg text-slate-600 dark:text-slate-400 mb-10">intensive industry-aligned training & certifications</p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- PEP Program -->
+            <div class="card training-card flex flex-col gap-3 p-8">
+                <img src="images/summer training certificate.png" alt="PEP Program Certificate" class="w-full h-32 object-cover rounded-lg mb-2 border-2 border-blue-200 dark:border-blue-800">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-2xl font-bold text-blue-700 dark:text-blue-300">Mastering in DSA</h3>
+                    <span class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold"><a href="./images/Mastering in DSA certificate.pdf" target="_blank" class="text-blue-600 underline dark:text-blue-400">View Certificate</a><i class="fas fa-certificate mr-1"></i>Certificate</span>
+                </div>
+                <ul class="list-disc list-inside text-slate-700 dark:text-slate-300 space-y-2 text-sm">
+                    <li>Completed an intensive training program focused on improving programming skills and strengthening theoretical knowledge through structured, industry-aligned practice.</li>
+                    <li>Earned an A grade in the PEP Program for Basics of DSA, for creating the project and demonstrating proficiency in data structures and algorithms.</li>
+                    <li>Gained hands-on experience in algorithm design, complexity analysis, and problem optimization.</li>
+                </ul>
+                <div class="mt-2">
+                    <span class="font-semibold text-indigo-600 dark:text-indigo-400">Skills Covered:</span>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="tech-badge">DSA</span>
+                        <span class="tech-badge">C++</span>
+                    </div>
+                </div>
+            </div>
+</section>
+
+<!-- ========== PROJECTS (with updated GitHub links) ========== -->
+<section id="projects" class="py-20 bg-gray-200 dark:bg-gray-800">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="section-title">⚡ Projects</h2>
+        <div class="grid md:grid-cols-2 gap-8 mt-12">
+            <!-- Project 1: Smart Parking System -->
+            <div class="card project-card flex flex-col gap-3 p-7">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400">Smart Parking System</h3>
+                    <a href="https://github.com/Priyanshu-Singh1/Smart-Parking-System" target="_blank" class="text-sm bg-gray-800 text-white px-4 py-1 rounded-full hover:bg-gray-700 transition"><i class="fab fa-github mr-1"></i>GitHub</a>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-400"><i class="far fa-calendar-alt mr-1"></i> June 2025 - July 2025</p>
+                <div class="flex flex-wrap gap-2 mt-1">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Tailwind CSS</span>
+                    <span class="tech-badge">PHP</span>
+                    <span class="tech-badge">DSA</span>
+                    <span class="tech-badge">MongoDB</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm mt-2">Tech stack: HTML, JavaScript, Tailwind CSS.</p>
+            </div>
+            <!-- Project 2: Clinic Management System -->
+            <div class="card project-card flex flex-col gap-3 p-7">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Clinic Management System</h3>
+                    <a href="https://github.com/ritikayadav08/Clinic-Management-system" target="_blank" class="text-sm bg-gray-800 text-white px-4 py-1 rounded-full hover:bg-gray-700 transition"><i class="fab fa-github mr-1"></i>GitHub</a>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-400"><i class="far fa-calendar-alt mr-1"></i> March 2025 - May 2025</p>
+                <div class="flex flex-wrap gap-2 mt-1">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Tailwind</span>
+                    <span class="tech-badge">PHP</span>
+                    <span class="tech-badge">MongoDB</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm mt-2">Tech stack: HTML, JavaScript, Tailwind CSS, Php, MongoDB.</p>
+            </div>
+            
+</section>
+
+<!-- ========== CERTIFICATES (exactly as original, but with enhanced card class) ========== -->
+<section id="certificates" class="py-20 text-center bg-gray-100 dark:bg-gray-900">
+<h2 class="section-title text-green-700 dark:text-green-400">Certificates</h2>
+<div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-6 px-6 text-left">
+<!-- all 5 original certificates with cert-card class for hover -->
+<div class="card cert-card text-green-700 dark:text-green-300"><img src="images/build enerative ai.png" alt="Certificate" class="w-full h-40 object-cover rounded mb-3"> Builld Generation AI Apps and Solutions With No-Code Tools | Aug 2025<br><a href="images/build generative ai app infosys sypringboard.pdf" target="_blank" class="text-blue-600 underline dark:text-blue-400">View Certificate</a></div>
+<div class="card cert-card text-green-700 dark:text-green-300"><img src="images/chatgpt4.png" alt="Certificate" class="w-full h-40 object-cover rounded mb-3">ChatGPT-4 Prompt Engineering: ChatGPT, Generative AI & LLM | Aug 2025<br><a href="images/chatgpt4 prompt engeeneering infosys springboard.pdf" target="_blank" class="text-blue-600 underline dark:text-blue-400">View Certificate</a></div>
+<div class="card cert-card text-green-700 dark:text-green-300"><img src="images/language-principal.png" alt=" Certificate" class="w-full h-40 object-cover rounded mb-3">Computational Theory Language Principal & Finite Automata Theory  | Aug 2025<br><a href="images/Computational Theory_ Language Principle & Finite Automata Theory.pdf" target="_blank" class="text-blue-600 underline dark:text-blue-400">View Certificate</a></div>
+<div class="card cert-card text-green-700 dark:text-green-300"><img src="images/what is generative ai.png" alt="Certificate" class="w-full h-40 object-cover rounded mb-3">What is Generative AI | Oct 2025<br><a href="images/CertificateOfCompletion_What Is Generative AI.pdf" target="_blank" class="text-blue-600 underline dark:text-blue-400">View Certificate</a></div>
+
+</section>
+<!-- ========== EDUCATION ========== -->
+<section id="education-page" class="py-2₀ bg-white dark:bg-gray-8₀ scroll-mt-16">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="section-title text-3xl flex items-center gap-3">
+            <i class="fas fa-graduation-cap text-blue-500 dark:text-blue-400"></i> Education
+        </h2>
+
+        <span class="inline-block bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 px-4 py-1 rounded-full text-sm font-semibold mb-6">
+            📄 Education page
+        </span>
+
+        <div class="space-y-5">
+
+            <!-- LPU -->
+            <div class="card edu-card flex flex-col md:flex-row justify-between items-start md:items-center gap-4 dark:bg-gray-700">
+                <div>
+                    <h3 class="text-2xl font-bold text-indigo-700 dark:text-indigo-300">
+                        Lovely Professional University
+                    </h3>
+                    <p class="text-lg dark:text-gray-200">
+                        Bachelor of Technology (B.Tech)
+                    </p>
+                    <p class="text-lg dark:text-gray-200">
+                        CGPA: 7.0
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                        <i class="fas fa-map-pin"></i> Jalandher, Punjab
+                    </p>
+                </div>
+                <span class="year-frame">
+                    <i class="far fa-calendar-alt"></i> 2023 - Present
+                </span>
+            </div>
+
+            <!-- Intermediate -->
+            <div class="card edu-card flex flex-col md:flex-row justify-between items-start md:items-center gap-4 dark:bg-gray-700">
+                <div>
+                    <h3 class="text-2xl font-bold text-indigo-700 dark:text-indigo-300">
+                        Macvision Aviraj World School
+                    </h3>
+                    <p class="text-lg dark:text-gray-200">
+                        Intermediate; Percentage: 84%
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                        <i class="fas fa-map-pin"></i> Dharuhera, Haryana
+                    </p>
+                </div>
+                <span class="year-frame">
+                    <i class="far fa-calendar-alt"></i> Jun 2021 - May 2022
+                </span>
+            </div>
+
+            <!-- Matriculation -->
+            <div class="card edu-card flex flex-col md:flex-row justify-between items-start md:items-center gap-4 dark:bg-gray-700">
+                <div>
+                    <h3 class="text-2xl font-bold text-emerald-700 dark:text-emerald-300">
+                        BMN Sr Sec School
+                    </h3>
+                    <p class="text-lg dark:text-gray-200">
+                        Matriculation; Percentage: 98%
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                        <i class="fas fa-map-pin"></i> Rewari, Haryana
+                    </p>
+                </div>
+                <span class="year-frame">
+                    <i class="far fa-calendar-alt"></i> Jun 2019 - May 2020
+                </span>
+            </div>
+
+        </div>
+
+        <p class="text-center text-gray-500 dark:text-gray-400 mt-8 text-sm italic">
+            📍 Education page — full academic timeline with location details
+        </p>
+    </div>
+</section>
+
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900 text-white">
+    <h2 class="section-title contact-title text-blue-400">Contact Me</h2>
+
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 px-6 mt-10">
+
+        <!-- CONTACT INFO (Updated to match second image style) -->
+        <div class="card bg-gray-800/80 backdrop-blur-md border-white/20 text-white p-8 rounded-2xl shadow-xl dark:bg-gray-700/80">
+            <h3 class="text-2xl font-semibold mb-6 text-green-400">Contact Information</h3>
+
+            <div class="space-y-4 text-white">
+                <!-- Name with proper label -->
+                <div>
+                    <span class="text-sm text-gray-400 block">Name</span>
+                    <span class="text-lg font-medium flex items-center gap-2">
+                        <span>👤</span> Ritika Yadav
+                    </span>
+                </div>
+                
+                <!-- Location with proper label -->
+                <div>
+                    <span class="text-sm text-gray-400 block">Location</span>
+                    <span class="text-lg font-medium flex items-center gap-2">
+                        <span>📍</span> Punjab, India
+                    </span>
+                </div>
+                
+                <!-- Phone with proper label -->
+                <div>
+                    <span class="text-sm text-gray-400 block">Phone</span>
+                    <a href="tel:+919588109292" class="text-lg font-medium hover:text-blue-400 transition flex items-center gap-2">
+                        <span>📞</span> +91 9588109292
+                    </a>
+                </div>
+                
+                <!-- Email with proper label -->
+                <div>
+                    <span class="text-sm text-gray-400 block">Email</span>
+                    <a href="mailto: yritika027@gmail.com" class="text-lg font-medium hover:text-blue-400 transition flex items-center gap-2">
+                        <span>📧</span> yritika027@gmail.com
+                    </a>
+                </div>
+                
+                <!-- LinkedIn with proper label -->
+                <div>
+                    <span class="text-sm text-gray-400 block">LinkedIn</span>
+                    <a href="https://www.linkedin.com/in/ritikayadav21/" target="_blank" class="text-lg font-medium hover:text-blue-400 transition flex items-center gap-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="w-5 h-5">
+                        linkedin.com/in/ritikayadav
+                    </a>
+                </div>
+                
+                <!-- GitHub with proper label -->
+                <div>
+                    <span class="text-sm text-gray-400 block">GitHub</span>
+                    <a href="https://github.com/ritikayadav08" target="_blank" class="text-lg font-medium hover:text-blue-400 transition flex items-center gap-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-5 h-5">
+                        github.com/ritikayadav08
+                    </a>
+                </div>
+            </div>
+
+            <!-- Buttons updated with better colors like second image -->
+            <div class="flex gap-4 mt-8">
+                <a href="https://www.linkedin.com/in/ritikayadav21/" target="_blank" class="px-5 py-2.5 bg-[#0077B5] hover:bg-[#005885] rounded-lg transition flex items-center gap-2">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="w-4 h-4"> LinkedIn
+                </a>
+                <a href="https://github.com/ritikayadav08" target="_blank" class="px-5 py-2.5 bg-[#333] hover:bg-[#24292e] rounded-lg transition flex items-center gap-2">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-4 h-4"> GitHub
+                </a>
+                <a href="mailto:yritika027@gmail.com" class="px-5 py-2.5 bg-[#25D366] hover:bg-[#128C7E] rounded-lg transition flex items-center gap-2">
+                    <span>📧</span> Email
+                </a>
+            </div>
+        </div>
+
+        <!-- NEW: CONTACT FORM (exactly like second image) -->
+        <div class="card bg-gray-800/80 backdrop-blur-md border-white/20 text-white p-8 rounded-2xl shadow-xl dark:bg-gray-700/80">
+            <h3 class="text-2xl font-semibold mb-6 text-green-400">Send Message</h3>
+            
+            <form class="space-y-5">
+                <!-- Your Name field -->
+                <div>
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Your Name</label>
+                    <input type="text" placeholder="Enter your full name" 
+                           class="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-green-400 focus:outline-none text-white placeholder-gray-400 transition">
+                </div>
+                
+                <!-- Your Email field -->
+                <div>
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Your Email</label>
+                    <input type="email" placeholder="Enter your email address" 
+                           class="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-green-400 focus:outline-none text-white placeholder-gray-400 transition">
+                </div>
+                
+                <!-- Phone Number field -->
+                <div>
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Phone Number</label>
+                    <input type="tel" placeholder="Enter your phone number" 
+                           class="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-green-400 focus:outline-none text-white placeholder-gray-400 transition">
+                </div>
+                
+                <!-- Your Message field -->
+                <div>
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Your Message</label>
+                    <textarea rows="4" placeholder="Type your message here..." 
+                              class="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-green-400 focus:outline-none text-white placeholder-gray-400 transition resize-none"></textarea>
+                </div>
+                
+                <!-- Send Message button -->
+                <button type="submit" class="w-full px-5 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg transition flex items-center justify-center gap-2 text-white font-medium text-lg">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer class="bg-black text-white/70 text-center p-5 text-sm border-t border-white/5 dark:bg-gray-950">
+    <p>© 2026 Ritika yadav· built with <i class="fas fa-heart text-red-400"></i> · location: Punjab, India</p>
+</footer>
+
+<script>
+if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+function toggleTheme() {
+    const html = document.documentElement;
+    html.classList.toggle('dark');
+    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+}
+</script>
+</body>
+</html>
